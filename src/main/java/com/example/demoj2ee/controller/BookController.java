@@ -22,10 +22,10 @@ public class BookController {
 
     @GetMapping
     public String listBooks(Model model) {
-        Book book = new Book(1, "1984", "George Orwell");
-        Book book2 = new Book(2, "Brave New World", "Aldous Huxley");
-        model.addAttribute("book", book);
-        model.addAttribute("book2", book2);
+        if (bookService.getAllBooks().isEmpty()) {
+            bookService.addBook(new Book(1, "1984", "George Orwell"));
+            bookService.addBook(new Book(2, "Brave New World", "Aldous Huxley"));
+        }
         model.addAttribute("books", bookService.getAllBooks());
         return "books";
     }

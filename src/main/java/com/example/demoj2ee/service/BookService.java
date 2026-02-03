@@ -19,6 +19,8 @@ public class BookService {
     }
 
     public void addBook(Book book) {
+        int maxId = books.stream().mapToInt(Book::getId).max().orElse(0);
+        book.setId(maxId + 1);
         books.add(book);
     }
 
